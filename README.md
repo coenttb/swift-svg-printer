@@ -1,107 +1,23 @@
 # swift-svg-printer
 
-A cross-platform Swift package to render SVG types as strings and bytes.
+[![CI](https://github.com/coenttb/swift-svg-printer/workflows/CI/badge.svg)](https://github.com/coenttb/swift-svg-printer/actions/workflows/ci.yml)
+![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
+
+Renders SVG types to strings and bytes for cross-platform SVG generation.
 
 ## Overview
 
-swift-svg-printer enables SVG elements from `swift-svg-types` to be rendered as SVG strings and byte arrays through an efficient printing system. It provides the rendering engine for the SVG ecosystem.
+swift-svg-printer provides the rendering layer for the SVG type system, converting `swift-svg-types` elements into SVG markup as strings or byte arrays.
 
-## Key Features
+## Features
 
-- **Efficient Rendering**: SVGPrinter renders to bytes (`ContiguousArray<UInt8>`) for performance
-- **String Conversion**: Simple conversion to String for convenience
-- **Attribute Handling**: Properly escapes and formats all SVG attributes
-- **Nested Elements**: Handles complex SVG hierarchies with proper indentation
-- **Minimal Dependencies**: Only depends on swift-svg-types
-
-## Usage Examples
-
-### Basic Usage
-
-```swift
-import SVGTypes
-import SVGPrinter
-
-let circle = Circle(cx: 50, cy: 50, r: 40, fill: "blue")
-let svgString = String(svg: circle)
-// <circle cx="50" cy="50" r="40" fill="blue"/>
-
-let svgBytes: ContiguousArray<UInt8> = SVGPrinter.render(circle)
-```
-
-### Complex SVG
-
-```swift
-import SVGTypes
-import SVGPrinter
-
-let svg = SVG(width: 200, height: 200) {
-    Defs {
-        LinearGradient(id: "gradient", x1: "0%", y1: "0%", x2: "100%", y2: "100%") {
-            Stop(offset: "0%", stopColor: "red")
-            Stop(offset: "100%", stopColor: "blue")
-        }
-    }
-    Circle(cx: 100, cy: 100, r: 80, fill: "url(#gradient)")
-}
-
-let svgString = String(svg: svg)
-```
-
-## Integration with Swift Ecosystem
-
-### swift-svg Integration
-
-[swift-svg](https://github.com/coenttb/swift-svg) provides a complete DSL built on top of swift-svg-printer:
-
-```swift
-import SVG
-
-let icon = SVG {
-    Circle()
-        .cx(50)
-        .cy(50)
-        .r(40)
-        .fill(.blue)
-        .stroke(.black)
-        .strokeWidth(2)
-}
-
-let rendered = String(svg: icon)
-```
-
-### HTML Integration
-
-Integrate with [swift-html](https://github.com/coenttb/swift-html) for embedding SVG in HTML:
-
-```swift
-import HTML
-import SVG
-
-struct IconButton: HTML {
-    var body: some HTML {
-        button {
-            SVG(width: 24, height: 24) {
-                Path(d: "M12 2L2 7l10 5 10-5-10-5z")
-                    .fill("currentColor")
-            }
-            "Click me"
-        }
-    }
-}
-```
-
-## Performance
-
-swift-svg-printer is optimized for performance:
-- Direct byte rendering avoids string allocations
-- Efficient attribute escaping
-- Minimal memory overhead
-- Suitable for server-side rendering at scale
+- Renders to `ContiguousArray<UInt8>` for memory efficiency
+- String conversion via `render()` method
+- Attribute escaping and formatting for valid SVG output
+- Configurable indentation and pretty-printing
+- Dependencies: swift-svg-types, swift-collections, swift-dependencies
 
 ## Installation
-
-### Swift Package Manager
 
 Add swift-svg-printer to your `Package.swift`:
 
@@ -119,71 +35,65 @@ targets: [
 ]
 ```
 
-### Xcode Project
-
-Add the package dependency in Xcode:
-- File → Add Package Dependencies
-- Enter: `https://github.com/coenttb/swift-svg-printer`
-
-## Testing
-
-swift-svg-printer includes support for snapshot testing:
+## Quick Start
 
 ```swift
-import SVGPrinterTestSupport
+import SVGPrinter
 
-@Test
-func testCircle() {
-    let circle = Circle(cx: 50, cy: 50, r: 40)
-    assertInlineSnapshot(of: circle, as: .svg) {
-        """
-        <circle cx="50" cy="50" r="40"/>
-        """
-    }
-}
+// Create a printer
+var printer = SVGPrinter()
+
+// Build SVG markup
+printer.append("<circle cx=\"50\" cy=\"50\" r=\"40\"/>")
+
+// Get result as string
+let svgString = String(decoding: printer.bytes, as: UTF8.self)
+// Output: <circle cx="50" cy="50" r="40"/>
 ```
 
-## Related Projects
+## Usage Examples
 
-swift-svg-printer is part of a comprehensive Swift SVG ecosystem:
+### Pretty Printing
 
-### Core Libraries
-- [swift-svg-types](https://github.com/coenttb/swift-svg-types): Type-safe SVG element definitions
-- [swift-svg](https://github.com/coenttb/swift-svg): Complete SVG DSL with builder syntax
-- [swift-html](https://github.com/coenttb/swift-html): HTML generation with SVG integration
+```swift
+import SVGPrinter
 
-### Server Integration
-- [coenttb-server](https://github.com/coenttb/coenttb-server): Modern Swift server framework
-- [swift-web](https://github.com/coenttb/swift-web): Modular web development tools
+var printer = SVGPrinter(.pretty)
+printer.append("<svg>")
+printer.appendNewlineIfNeeded()
+printer.indent()
+printer.appendIndentationIfNeeded()
+printer.append("<circle cx=\"50\" cy=\"50\" r=\"40\"/>")
+printer.outdent()
+printer.appendNewlineIfNeeded()
+printer.append("</svg>")
 
-## Real-World Usage
+let output = String(decoding: printer.bytes, as: UTF8.self)
+```
 
-swift-svg-printer powers production applications:
+### Attribute Management
 
-- **[coenttb.com](https://coenttb.com)**: Dynamic SVG generation for icons and graphics
-- **[coenttb-com-server](https://github.com/coenttb/coenttb-com-server)**: Server-side SVG rendering
+```swift
+import SVGPrinter
+import OrderedCollections
 
-Using `swift-svg-printer` in your project? Open an issue or submit a PR to add your project to this list!
+var printer = SVGPrinter()
+printer.attributes["fill"] = "red"
+printer.attributes["stroke"] = "black"
 
-## Documentation
+// Attributes can be accessed and managed
+let fillColor = printer.attributes["fill"] // "red"
+```
 
-Comprehensive documentation is available at the [Swift Package Index](https://swiftpackageindex.com/coenttb/swift-svg-printer/main/documentation/svgprinter).
+## Related Packages
+
+- [swift-svg-types](https://github.com/coenttb/swift-svg-types): A Swift package with foundational types for SVG.
+- [swift-svg](https://github.com/coenttb/swift-svg): A Swift package for type-safe SVG generation.
+- [swift-html](https://github.com/coenttb/swift-html): The Swift library for domain-accurate and type-safe HTML & CSS.
 
 ## Contributing
 
-Contributions are welcome! Please feel free to:
-
-- Open issues for bugs or feature requests
-- Submit pull requests
-- Improve documentation
-- Share your projects built with swift-svg-printer
-
-## Feedback & Support
-
-- **Issues**: [GitHub Issues](https://github.com/coenttb/swift-svg-printer/issues)
-- **Newsletter**: [Subscribe](http://coenttb.com/en/newsletter/subscribe)
-- **Social**: [Follow @coenttb](http://x.com/coenttb)
-- **Professional**: [LinkedIn](https://www.linkedin.com/in/tenthijeboonkkamp)
+Contributions are welcome! Please open an issue or submit a pull request.
 
 ## License
 
