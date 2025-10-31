@@ -87,9 +87,18 @@ let fillColor = printer.attributes["fill"] // "red"
 
 ## Related Packages
 
+### Dependencies
+
 - [swift-svg-types](https://github.com/coenttb/swift-svg-types): A Swift package with foundational types for SVG.
+
+### Used By
+
 - [swift-svg](https://github.com/coenttb/swift-svg): A Swift package for type-safe SVG generation.
-- [swift-html](https://github.com/coenttb/swift-html): The Swift library for domain-accurate and type-safe HTML & CSS.
+
+### Third-Party Dependencies
+
+- [pointfreeco/swift-dependencies](https://github.com/pointfreeco/swift-dependencies): A dependency management library for controlling dependencies in Swift.
+- [apple/swift-collections](https://github.com/apple/swift-collections): Commonly used data structures for Swift.
 
 ## Contributing
 
