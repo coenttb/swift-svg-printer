@@ -21,18 +21,18 @@
 /// }
 /// ```
 public struct SVGGroup<Content: SVG>: SVG {
-    /// The content of the group.
-    let content: Content
+  /// The content of the group.
+  let content: Content
 
-    /// Creates a group with the given content.
-    ///
-    /// - Parameter content: A closure that returns the SVG content.
-    public init(@SVGBuilder _ content: () -> Content) {
-        self.content = content()
-    }
+  /// Creates a group with the given content.
+  ///
+  /// - Parameter content: A closure that returns the SVG content.
+  public init(@SVGBuilder _ content: () -> Content) {
+    self.content = content()
+  }
 
-    /// The body of the group is its content.
-    public var body: some SVG {
-        content
-    }
+  /// The body of the group is its content.
+  public var body: some SVG {
+    content
+  }
 }
