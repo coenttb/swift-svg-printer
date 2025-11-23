@@ -7,7 +7,7 @@
 
 import OrderedCollections
 import SVGPrinter
-import SVGTypes
+import SVG_Standard
 import Testing
 
 @Suite("SVG Printer Tests")

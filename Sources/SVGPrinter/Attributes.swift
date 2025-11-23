@@ -7,7 +7,7 @@
 
 import Foundation
 import OrderedCollections
-import SVGTypes
+import SVG_Standard
 
 /// An SVG element that adds an attribute to the printer.
 public struct Attribute: SVG {
@@ -69,12 +69,12 @@ public func strokeOpacity(_ value: Double) -> Attribute {
 }
 
 /// Sets the stroke linecap.
-public func strokeLinecap(_ value: SVGLineCap) -> Attribute {
+public func strokeLinecap(_ value: W3C_SVG2.Painting.LineCap) -> Attribute {
     Attribute(key: "stroke-linecap", value: value.rawValue)
 }
 
 /// Sets the stroke linejoin.
-public func strokeLinejoin(_ value: SVGLineJoin) -> Attribute {
+public func strokeLinejoin(_ value: W3C_SVG2.Painting.LineJoin) -> Attribute {
     Attribute(key: "stroke-linejoin", value: value.rawValue)
 }
 
@@ -101,13 +101,13 @@ public func strokeMiterlimit(_ value: Double) -> Attribute {
 // MARK: - Transform
 
 /// Sets the transform attribute.
-public func transform(_ transforms: SVGTransform...) -> Attribute {
+public func transform(_ transforms: W3C_SVG2.Types.Transform...) -> Attribute {
     let value = transforms.map { $0.stringValue }.joined(separator: " ")
     return Attribute(key: "transform", value: value)
 }
 
 /// Sets the transform attribute.
-public func transform(_ transforms: [SVGTransform]) -> Attribute {
+public func transform(_ transforms: [W3C_SVG2.Types.Transform]) -> Attribute {
     let value = transforms.map { $0.stringValue }.joined(separator: " ")
     return Attribute(key: "transform", value: value)
 }

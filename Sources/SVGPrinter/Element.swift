@@ -7,7 +7,7 @@
 
 import Foundation
 import OrderedCollections
-import SVGTypes
+import SVG_Standard
 
 /// A concrete SVG element with its content.
 public struct Element<ElementType: SVGElementType>: SVG {
@@ -55,9 +55,9 @@ public struct Element<ElementType: SVGElementType>: SVG {
             printer.append(">")
 
             // Handle text content for Text and TSpan elements
-            if let textElement = svg.element as? Text, let text = textElement.content {
+            if let textElement = svg.element as? W3C_SVG2.Text.Text, let text = textElement.content {
                 printer.append(text)
-            } else if let tspanElement = svg.element as? TSpan, let text = tspanElement.content {
+            } else if let tspanElement = svg.element as? W3C_SVG2.Text.TSpan, let text = tspanElement.content {
                 printer.append(text)
             } else if hasChildContent {
                 // Render actual child content with proper indentation
@@ -122,32 +122,32 @@ private func renderAttributes<T: SVGElementType>(for element: T, into printer: i
             printer.append(" \(attributeName)=\"\(value)\"")
         } else if let value = child.value as? Bool, value {
             printer.append(" \(attributeName)=\"\(attributeName)\"")
-        } else if let transforms = child.value as? [SVGTransform] {
+        } else if let transforms = child.value as? [W3C_SVG2.Types.Transform] {
             let transformString = transforms.map { $0.stringValue }.joined(separator: " ")
             printer.append(" transform=\"\(transformString)\"")
-        } else if let fillRule = child.value as? SVGFillRule {
+        } else if let fillRule = child.value as? W3C_SVG2.Painting.FillRule {
             printer.append(" fill-rule=\"\(fillRule.rawValue)\"")
-        } else if let units = child.value as? ClipPath.ClipPathUnits {
+        } else if let units = child.value as? W3C_SVG2.Painting.ClipPath.ClipPathUnits {
             printer.append(" \(attributeName)=\"\(units.rawValue)\"")
-        } else if let units = child.value as? Mask.MaskUnits {
+        } else if let units = child.value as? W3C_SVG2.Painting.Mask.MaskUnits {
             printer.append(" \(attributeName)=\"\(units.rawValue)\"")
-        } else if let units = child.value as? LinearGradient.GradientUnits {
+        } else if let units = child.value as? W3C_SVG2.PaintServers.LinearGradient.GradientUnits {
             printer.append(" \(attributeName)=\"\(units.rawValue)\"")
-        } else if let units = child.value as? RadialGradient.GradientUnits {
+        } else if let units = child.value as? W3C_SVG2.PaintServers.RadialGradient.GradientUnits {
             printer.append(" \(attributeName)=\"\(units.rawValue)\"")
-        } else if let method = child.value as? LinearGradient.SpreadMethod {
+        } else if let method = child.value as? W3C_SVG2.PaintServers.LinearGradient.SpreadMethod {
             printer.append(" \(attributeName)=\"\(method.rawValue)\"")
-        } else if let method = child.value as? RadialGradient.SpreadMethod {
+        } else if let method = child.value as? W3C_SVG2.PaintServers.RadialGradient.SpreadMethod {
             printer.append(" \(attributeName)=\"\(method.rawValue)\"")
-        } else if let units = child.value as? Pattern.PatternUnits {
+        } else if let units = child.value as? W3C_SVG2.PaintServers.Pattern.PatternUnits {
             printer.append(" \(attributeName)=\"\(units.rawValue)\"")
-        } else if let units = child.value as? Marker.MarkerUnits {
+        } else if let units = child.value as? W3C_SVG2.Painting.Marker.MarkerUnits {
             printer.append(" \(attributeName)=\"\(units.rawValue)\"")
-        } else if let lengthAdjust = child.value as? Text.TextLengthAdjust {
+        } else if let lengthAdjust = child.value as? W3C_SVG2.Text.Text.TextLengthAdjust {
             printer.append(" \(attributeName)=\"\(lengthAdjust.rawValue)\"")
-        } else if let length = child.value as? SVGLength {
+        } else if let length = child.value as? W3C_SVG2.Types.Length {
             printer.append(" \(attributeName)=\"\(length.stringValue)\"")
-        } else if let viewBox = child.value as? SVGViewBox {
+        } else if let viewBox = child.value as? W3C_SVG2.Types.ViewBox {
             printer.append(" \(attributeName)=\"\(viewBox.stringValue)\"")
         }
     }
