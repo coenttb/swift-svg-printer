@@ -69,12 +69,12 @@ public func strokeOpacity(_ value: Double) -> Attribute {
 }
 
 /// Sets the stroke linecap.
-public func strokeLinecap(_ value: W3C_SVG2.Painting.LineCap) -> Attribute {
+public func strokeLinecap(_ value: SVG_Standard.Painting.LineCap) -> Attribute {
     Attribute(key: "stroke-linecap", value: value.rawValue)
 }
 
 /// Sets the stroke linejoin.
-public func strokeLinejoin(_ value: W3C_SVG2.Painting.LineJoin) -> Attribute {
+public func strokeLinejoin(_ value: SVG_Standard.Painting.LineJoin) -> Attribute {
     Attribute(key: "stroke-linejoin", value: value.rawValue)
 }
 
@@ -101,13 +101,13 @@ public func strokeMiterlimit(_ value: Double) -> Attribute {
 // MARK: - Transform
 
 /// Sets the transform attribute.
-public func transform(_ transforms: W3C_SVG2.Types.Transform...) -> Attribute {
+public func transform(_ transforms: SVG_Standard.Types.Transform...) -> Attribute {
     let value = transforms.map { $0.stringValue }.joined(separator: " ")
     return Attribute(key: "transform", value: value)
 }
 
 /// Sets the transform attribute.
-public func transform(_ transforms: [W3C_SVG2.Types.Transform]) -> Attribute {
+public func transform(_ transforms: [SVG_Standard.Types.Transform]) -> Attribute {
     let value = transforms.map { $0.stringValue }.joined(separator: " ")
     return Attribute(key: "transform", value: value)
 }

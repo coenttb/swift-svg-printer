@@ -6,7 +6,7 @@
 //
 
 import OrderedCollections
-import SVGPrinter
+import SVG_Renderable
 import Testing
 
 @Suite("README Verification")

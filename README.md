@@ -7,7 +7,7 @@ Renders SVG types to strings and bytes for cross-platform SVG generation.
 
 ## Overview
 
-swift-svg-printer provides the rendering layer for the SVG type system, converting `swift-svg-types` elements into SVG markup as strings or byte arrays.
+swift-svg-printer provides the rendering layer for the SVG type system, converting `swift-svg-standard` elements into SVG markup as strings or byte arrays.
 
 ## Features
 
@@ -15,7 +15,7 @@ swift-svg-printer provides the rendering layer for the SVG type system, converti
 - String conversion via `render()` method
 - Attribute escaping and formatting for valid SVG output
 - Configurable indentation and pretty-printing
-- Dependencies: swift-svg-types, swift-collections, swift-dependencies
+- Dependencies: swift-svg-standard, swift-collections, swift-dependencies
 
 ## Installation
 
@@ -38,7 +38,7 @@ targets: [
 ## Quick Start
 
 ```swift
-import SVGPrinter
+import SVG_Renderable
 
 // Create a printer
 var printer = SVGPrinter()
@@ -56,7 +56,7 @@ let svgString = String(decoding: printer.bytes, as: UTF8.self)
 ### Pretty Printing
 
 ```swift
-import SVGPrinter
+import SVG_Renderable
 
 var printer = SVGPrinter(.pretty)
 printer.append("<svg>")
@@ -74,7 +74,7 @@ let output = String(decoding: printer.bytes, as: UTF8.self)
 ### Attribute Management
 
 ```swift
-import SVGPrinter
+import SVG_Renderable
 import OrderedCollections
 
 var printer = SVGPrinter()
@@ -89,7 +89,7 @@ let fillColor = printer.attributes["fill"] // "red"
 
 ### Dependencies
 
-- [swift-svg-types](https://github.com/coenttb/swift-svg-types): A Swift package with foundational types for SVG.
+- [swift-svg-standard](https://github.com/swift-standard/swift-svg-standard): A Swift package with foundational types for SVG.
 
 ### Used By
 

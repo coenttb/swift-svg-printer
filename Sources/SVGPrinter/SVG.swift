@@ -29,7 +29,7 @@ import Dependencies
 /// ```
 ///
 /// - Note: This protocol follows the same design as PointFreeHTML's `HTML` protocol,
-///   making it familiar to developers who have worked with either SwiftUI or PointFreeHTML.
+///   making it familiar to developers who have worked with either SwiftUI or HTML_Renderable.
 public protocol SVG {
     /// The type of SVG content that this SVG element or component contains.
     associatedtype Content: SVG

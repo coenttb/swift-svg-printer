@@ -6,7 +6,7 @@
 //
 
 import OrderedCollections
-import SVGPrinter
+import SVG_Renderable
 import SVG_Standard
 import Testing
 
