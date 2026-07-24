@@ -55,9 +55,13 @@ public struct Element<ElementType: SVGElementType>: SVG {
             printer.append(">")
 
             // Handle text content for Text and TSpan elements
-            if let textElement = svg.element as? SVG_Standard.Text.Text, let text = textElement.content {
+            if let textElement = svg.element as? SVG_Standard.Text.Text,
+                let text = textElement.content
+            {
                 printer.append(text)
-            } else if let tspanElement = svg.element as? SVG_Standard.Text.TSpan, let text = tspanElement.content {
+            } else if let tspanElement = svg.element as? SVG_Standard.Text.TSpan,
+                let text = tspanElement.content
+            {
                 printer.append(text)
             } else if hasChildContent {
                 // Render actual child content with proper indentation
@@ -131,13 +135,17 @@ private func renderAttributes<T: SVGElementType>(for element: T, into printer: i
             printer.append(" \(attributeName)=\"\(units.rawValue)\"")
         } else if let units = child.value as? SVG_Standard.Painting.Mask.MaskUnits {
             printer.append(" \(attributeName)=\"\(units.rawValue)\"")
-        } else if let units = child.value as? SVG_Standard.PaintServers.LinearGradient.GradientUnits {
+        } else if let units = child.value as? SVG_Standard.PaintServers.LinearGradient.GradientUnits
+        {
             printer.append(" \(attributeName)=\"\(units.rawValue)\"")
-        } else if let units = child.value as? SVG_Standard.PaintServers.RadialGradient.GradientUnits {
+        } else if let units = child.value as? SVG_Standard.PaintServers.RadialGradient.GradientUnits
+        {
             printer.append(" \(attributeName)=\"\(units.rawValue)\"")
-        } else if let method = child.value as? SVG_Standard.PaintServers.LinearGradient.SpreadMethod {
+        } else if let method = child.value as? SVG_Standard.PaintServers.LinearGradient.SpreadMethod
+        {
             printer.append(" \(attributeName)=\"\(method.rawValue)\"")
-        } else if let method = child.value as? SVG_Standard.PaintServers.RadialGradient.SpreadMethod {
+        } else if let method = child.value as? SVG_Standard.PaintServers.RadialGradient.SpreadMethod
+        {
             printer.append(" \(attributeName)=\"\(method.rawValue)\"")
         } else if let units = child.value as? SVG_Standard.PaintServers.Pattern.PatternUnits {
             printer.append(" \(attributeName)=\"\(units.rawValue)\"")
