@@ -8,19 +8,18 @@ let package = Package(
         .macOS(.v15),
         .iOS(.v18),
         .tvOS(.v18),
-        .watchOS(.v11),
+        .watchOS(.v11)
     ],
     products: [
         .library(
             name: "SVGPrinter",
             targets: ["SVGPrinter"]
-        ),
+        )
     ],
     dependencies: [
-        .package(url: "https://github.com/swift-standards/swift-standards.git", from: "0.1.0"),
         .package(url: "https://github.com/swift-standards/swift-svg-standard.git", from: "0.1.0"),
         .package(url: "https://github.com/apple/swift-collections", from: "1.1.0"),
-        .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.0.0"),
+        .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.0.0")
     ],
     targets: [
         .target(
@@ -28,20 +27,20 @@ let package = Package(
             dependencies: [
                 .product(name: "SVG Standard", package: "swift-svg-standard"),
                 .product(name: "OrderedCollections", package: "swift-collections"),
-                .product(name: "Dependencies", package: "swift-dependencies"),
+                .product(name: "Dependencies", package: "swift-dependencies")
             ]
         ),
         .testTarget(
             name: "SVGPrinterTests",
             dependencies: ["SVGPrinter"]
-        ),
+        )
     ]
 )
 
 let swiftSettings: [SwiftSetting] = [
     .enableUpcomingFeature("MemberImportVisibility"),
     .enableUpcomingFeature("StrictUnsafe"),
-    .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
+    .enableUpcomingFeature("NonisolatedNonsendingByDefault")
 ]
 
 for index in package.targets.indices {
