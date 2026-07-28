@@ -136,7 +136,7 @@ public struct _SVGArray<Element: SVG>: SVG {
     }
 
     /// This type uses direct rendering and doesn't have a body.
-    public var body: Never { fatalError() }
+    public var body: Never { fatalError("body should not be called on a primitive SVG node") }
 }
 
 /// A type to represent conditional SVG content based on if/else conditions.
@@ -164,7 +164,7 @@ public enum _SVGConditional<First: SVG, Second: SVG>: SVG {
     }
 
     /// This type uses direct rendering and doesn't have a body.
-    public var body: Never { fatalError() }
+    public var body: Never { fatalError("body should not be called on a primitive SVG node") }
 }
 
 /// Represents plain text content in SVG, with proper XML escaping.
@@ -211,7 +211,7 @@ public struct SVGText: SVG {
     }
 
     /// This type uses direct rendering and doesn't have a body.
-    public var body: Never { fatalError() }
+    public var body: Never { fatalError("body should not be called on a primitive SVG node") }
 
     /// Concatenates two SVG text components.
     ///
@@ -265,7 +265,7 @@ public struct _SVGTuple<each Content: SVG>: SVG {
     }
 
     /// This type uses direct rendering and doesn't have a body.
-    public var body: Never { fatalError() }
+    public var body: Never { fatalError("body should not be called on a primitive SVG node") }
 }
 
 /// Allows optional values to be used as SVG elements.
@@ -284,5 +284,5 @@ extension Optional: SVG where Wrapped: SVG {
     }
 
     /// This type uses direct rendering and doesn't have a body.
-    public var body: Never { fatalError() }
+    public var body: Never { fatalError("body should not be called on a primitive SVG node") }
 }

@@ -57,7 +57,7 @@ public struct Document: SVG {
         renderContent(svg.content, into: &printer)
     }
 
-    public var body: Never { fatalError() }
+    public var body: Never { fatalError("body should not be called on a primitive SVG node") }
 }
 
 private func renderContent<T: SVG>(_ content: T, into printer: inout SVGPrinter) {

@@ -28,5 +28,5 @@ public struct SVGRaw: SVG {
         printer.append(svg.content)
     }
 
-    public var body: Never { fatalError() }
+    public var body: Never { fatalError("body should not be called on a primitive SVG node") }
 }
