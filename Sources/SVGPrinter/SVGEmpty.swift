@@ -18,5 +18,5 @@ public struct SVGEmpty: SVG {
         // Intentionally empty
     }
 
-    public var body: Never { fatalError() }
+    public var body: Never { fatalError("body should not be called on a primitive SVG node") }
 }

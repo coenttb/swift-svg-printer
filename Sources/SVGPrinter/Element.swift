@@ -81,13 +81,13 @@ public struct Element<ElementType: SVGElementType>: SVG {
         }
     }
 
-    public var body: Never { fatalError() }
+    public var body: Never { fatalError("body should not be called on a primitive SVG node") }
 }
 
 // Helper function to check if content is empty
 private func isContentEmpty(_ content: any SVG) -> Bool {
     if content is Never { return true }
-    if content as? Never != nil { return true }
+    if content is Never { return true }
     return false
 }
 
@@ -135,17 +135,13 @@ private func renderAttributes<T: SVGElementType>(for element: T, into printer: i
             printer.append(" \(attributeName)=\"\(units.rawValue)\"")
         } else if let units = child.value as? SVG_Standard.Painting.Mask.MaskUnits {
             printer.append(" \(attributeName)=\"\(units.rawValue)\"")
-        } else if let units = child.value as? SVG_Standard.PaintServers.LinearGradient.GradientUnits
-        {
+        } else if let units = child.value as? SVG_Standard.PaintServers.LinearGradient.GradientUnits {
             printer.append(" \(attributeName)=\"\(units.rawValue)\"")
-        } else if let units = child.value as? SVG_Standard.PaintServers.RadialGradient.GradientUnits
-        {
+        } else if let units = child.value as? SVG_Standard.PaintServers.RadialGradient.GradientUnits {
             printer.append(" \(attributeName)=\"\(units.rawValue)\"")
-        } else if let method = child.value as? SVG_Standard.PaintServers.LinearGradient.SpreadMethod
-        {
+        } else if let method = child.value as? SVG_Standard.PaintServers.LinearGradient.SpreadMethod {
             printer.append(" \(attributeName)=\"\(method.rawValue)\"")
-        } else if let method = child.value as? SVG_Standard.PaintServers.RadialGradient.SpreadMethod
-        {
+        } else if let method = child.value as? SVG_Standard.PaintServers.RadialGradient.SpreadMethod {
             printer.append(" \(attributeName)=\"\(method.rawValue)\"")
         } else if let units = child.value as? SVG_Standard.PaintServers.Pattern.PatternUnits {
             printer.append(" \(attributeName)=\"\(units.rawValue)\"")

@@ -65,7 +65,7 @@ extension SVG {
 /// contexts where no content is expected or possible.
 extension Never: SVG {
     public static func _render(_ svg: Self, into printer: inout SVGPrinter) {}
-    public var body: Never { fatalError() }
+    public var body: Never { fatalError("body should not be called on a primitive SVG node") }
 }
 
 /// Type-erased SVG element that can hold any SVG content.
@@ -83,7 +83,7 @@ public struct AnySVG: SVG {
         render(svg.base)
     }
 
-    public var body: Never { fatalError() }
+    public var body: Never { fatalError("body should not be called on a primitive SVG node") }
 }
 
 extension AnySVG {
