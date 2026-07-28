@@ -17,7 +17,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/swift-standards/swift-svg-standard.git", from: "0.1.0"),
+        .package(url: "https://github.com/swift-standards/swift-svg-standard.git", branch: "main"),
         .package(url: "https://github.com/apple/swift-collections", from: "1.1.0"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.0.0")
     ],
