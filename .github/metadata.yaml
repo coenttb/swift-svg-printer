@@ -1,0 +1,13 @@
+# .github/metadata.yaml
+description: "A Swift package for rendering SVG to String or bytes."
+homepage: "https://swift-institute.org"
+topics:
+  - graphics
+  - rendering
+  - serialization
+  - svg
+  - svg-rendering
+  - swift
+  - utilities
+readme:
+  family: E
